@@ -2,7 +2,7 @@ import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateCol
 
 @Entity({ name: 'user' })
 export default class UserEntity {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('identity')
     id: number;
 
     @Column({ name: 'name', nullable: true })
@@ -17,7 +17,7 @@ export default class UserEntity {
     @Column({ name: 'password', nullable: true })
     password: string;
 
-    @Column({ name: 'email', nullable: true })
+    @Column({ name: 'picture_url', nullable: true })
     pictureUrl: string;
 
     @CreateDateColumn({ name: 'created_at' })

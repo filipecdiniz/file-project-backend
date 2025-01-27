@@ -5,6 +5,7 @@ import { UserModule } from './user/user.module';
 import { AuthController } from './auth/auth.controller';
 import { AuthService } from './auth/auth.service';
 import { AuthModule } from './auth/auth.module';
+import { LoginTokenService } from './login-token/login-token.service';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { AuthModule } from './auth/auth.module';
     }),
     UserModule,
     AuthModule,
-  ]
+  ],
+  providers: [LoginTokenService]
 })
 export class AppModule { }
