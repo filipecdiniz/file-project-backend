@@ -3,11 +3,13 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { AuthController } from './auth/auth.controller';
+import { AuthService } from './auth/auth.service';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ 
-      envFilePath: ['.env.development.local'] 
+    ConfigModule.forRoot({
+      envFilePath: ['.env.development.local']
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -23,8 +25,7 @@ import { AuthController } from './auth/auth.controller';
       // synchronize: true
     }),
     UserModule,
-  ],
-  controllers: [AuthController],
-  providers: [],
+    AuthModule,
+  ]
 })
 export class AppModule { }
