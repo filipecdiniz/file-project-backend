@@ -1,0 +1,5 @@
+- Typeorm
+- postgres
+- @nestjs/config
+- @nestjs/typeorm
+- pg
