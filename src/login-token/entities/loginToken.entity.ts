@@ -5,7 +5,7 @@ export default class loginTokenEntity {
     @PrimaryGeneratedColumn('identity')
     id: number;
 
-    @Column({ name: 'user_id', nullable: false })
+    @Column({ name: 'user_id', nullable: false }) 
     userId: number;
 
     @Column({ name: 'code', nullable: false })
