@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { LoginTokenService } from './login-token/login-token.service';
+import { LoginTokenModule } from './login-token/login-token.module';
 
 @Module({
   imports: [
@@ -25,7 +26,7 @@ import { LoginTokenService } from './login-token/login-token.service';
     }),
     UserModule,
     AuthModule,
+    LoginTokenModule,
   ],
-  providers: [LoginTokenService]
 })
 export class AppModule { }

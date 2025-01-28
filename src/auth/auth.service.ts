@@ -1,17 +1,19 @@
 import { Injectable } from '@nestjs/common';
-import LoginWithEmailOnly from './dtos/LoginWithEmailOnly.dto';
 import ReturnLoginDTO from './dtos/ReturnLogin.dto';
 import LoginWithPasswordDTO from './dtos/LoginWithPassword.dto';
 import { JwtService } from '@nestjs/jwt';
+import { LoginTokenService } from 'src/login-token/login-token.service';
 
 @Injectable()
 export class AuthService {
 
     constructor(
-        private readonly jwtService: JwtService
+        private readonly jwtService: JwtService,
+        private readonly loginTokenService: LoginTokenService
     ) { }
 
-    async loginWithEmailOnly(loginWithEmailOnly: LoginWithEmailOnly): Promise<ReturnLoginDTO> {
+    async loginWithEmailOnly(email: string): Promise<ReturnLoginDTO> {
+        await this.loginTokenService.createToken(email)
         return
     }
 

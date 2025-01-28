@@ -9,8 +9,12 @@ export class UserService {
         @InjectRepository(UserEntity)
         private readonly userRepository: Repository<UserEntity>
     ) { }
-    
-    async createUser() {
 
+    async createUserWithEmailOnly(email: string): Promise<UserEntity> {
+        const userExists = this.userRepository.findOne({ where: { email } })
+
+        return await this.userRepository.save({
+            email: email
+        })
     }
 }

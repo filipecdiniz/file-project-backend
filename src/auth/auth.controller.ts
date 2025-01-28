@@ -1,6 +1,5 @@
 import { Body, Controller, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import LoginWithEmailOnly from './dtos/LoginWithEmailOnly.dto';
 import ReturnLoginDTO from './dtos/ReturnLogin.dto';
 import LoginWithPasswordDTO from './dtos/LoginWithPassword.dto';
 
@@ -12,11 +11,11 @@ export class AuthController {
 
     @Post('login')
     @UsePipes(ValidationPipe)
-    async loginWithEmailOnly(@Body() loginWithEmailOnly: LoginWithEmailOnly): Promise<ReturnLoginDTO> {
-        return await this.authService.loginWithEmailOnly(loginWithEmailOnly)
+    async loginWithEmailOnly(@Body() email: string): Promise<ReturnLoginDTO> {
+        return await this.authService.loginWithEmailOnly(email)
     }
 
     async loginWithPassword(@Body() loginWithEmail: LoginWithPasswordDTO) {
-        return 
+        return
     }
 }
