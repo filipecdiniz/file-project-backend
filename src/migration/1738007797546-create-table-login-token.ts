@@ -10,6 +10,7 @@ export class CreateTableLoginToken1738007797546 implements MigrationInterface {
                 code text,
                 expires date,
                 used boolean
+                created_at date
             );
 
             ALTER TABLE login_token
