@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import ReturnLoginDTO from './dtos/ReturnLogin.dto';
 import LoginWithPasswordDTO from './dtos/LoginWithPassword.dto';
 import LoginWithEmailOnlyDTO from './dtos/LoginWithEmailOnly.dto';
+import ValidateLoginCodeDTO from './dtos/ValidateLoginCode.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -18,17 +19,13 @@ export class AuthController {
 
     @Post('validate-code')
     @UsePipes(ValidationPipe)
-    async validateCode(@Body() loginWithEmailOnlyDTO: LoginWithEmailOnlyDTO) {
-        return await this.authService.validateToken(loginWithEmailOnlyDTO)
+    async validateCode(@Body() validateLoginCodeDTO: ValidateLoginCodeDTO) {
+        return await this.authService.validateLoginCode(validateLoginCodeDTO)
     }
 
     @Get()
     @UsePipes(ValidationPipe)
     async allAuths() {
         return await this.authService.teste()
-    }
-
-    async loginWithPassword(@Body() loginWithEmail: LoginWithPasswordDTO) {
-        return
     }
 }

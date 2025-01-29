@@ -5,6 +5,7 @@ import { LoginTokenService } from 'src/login-token/login-token.service';
 import { UserService } from 'src/user/user.service';
 import { MailerService } from 'src/mailer/mailer.service';
 import LoginWithEmailOnlyDTO from './dtos/LoginWithEmailOnly.dto';
+import ValidateLoginCodeDTO from './dtos/ValidateLoginCode.dto';
 
 @Injectable()
 export class AuthService {
@@ -22,11 +23,15 @@ export class AuthService {
         return await this.mailerService.sendMessage(email, codeToken)
     }
 
-    async validateToken(loginWithEmailOnlyDTO: LoginWithEmailOnlyDTO) {
-        if (!loginWithEmailOnlyDTO.code) {
-            return new BadRequestException(`Necessário passar o código de autenticação!`)
+    async validateLoginCode({ email, code }: ValidateLoginCodeDTO) {
+        if (!code) {
+            return new BadRequestException(`No code passed!`)
         }
-        const loginToken = await this.loginTokenService.validateToken(loginWithEmailOnlyDTO.email, loginWithEmailOnlyDTO.code)
+        const user = await this.userService.findUserByEmail(email)
+        if (!user) {
+            return new BadRequestException(`Email not found!`)
+        }
+        return await this.loginTokenService.validateToken(user.id, code)
 
     }
 

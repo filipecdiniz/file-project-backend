@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import loginTokenEntity from './entities/loginToken.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -29,12 +29,15 @@ export class LoginTokenService {
         return code
     }
 
-    async validateToken(email: string, code: string){
-        try {
-            
-        } catch (error) {
-            
+    async validateToken(userId: number, code: string) {
+        const loginToken = await this.loginTokenRepository.findOne({ where: { userId, code } })
+        if (!loginToken) {
+            throw new BadRequestException("Invalid code!")
         }
+        if (loginToken.expires < new Date()) {
+            throw new BadRequestException("Code is alredy expired!")
+        }
+        return loginToken
     }
 
     async allTokens() {
