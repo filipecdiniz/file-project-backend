@@ -25,7 +25,7 @@ export class MailerService {
             },
             to: [email],
             subject: 'Código de Autenticação',
-            text: `Seu código de login é: ${code}. Ele expirará em 10 minutos.`
+            text: `Seu código de login é: ${code}. Ele expirará em 5 minutos.`
         }
 
         try {
