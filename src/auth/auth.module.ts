@@ -3,6 +3,8 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { JwtModule } from '@nestjs/jwt';
 import { LoginTokenModule } from 'src/login-token/login-token.module';
+import { UserModule } from 'src/user/user.module';
+import { MailerModule } from 'src/mailer/mailer.module';
 
 @Module({
     providers: [AuthService],
@@ -13,7 +15,9 @@ import { LoginTokenModule } from 'src/login-token/login-token.module';
             secret: process.env.JWT_SECRET,
             signOptions: { expiresIn: '1d' }
         }),
-        LoginTokenModule
+        LoginTokenModule,
+        UserModule,
+        MailerModule
     ]
 })
 export class AuthModule { }

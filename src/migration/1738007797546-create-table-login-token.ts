@@ -8,8 +8,8 @@ export class CreateTableLoginToken1738007797546 implements MigrationInterface {
                 id serial primary key,
                 user_id int,
                 code text,
-                expires date,
-                used boolean
+                expires timestamp,
+                used boolean,
                 created_at date
             );
 

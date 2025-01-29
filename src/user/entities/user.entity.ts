@@ -8,9 +8,6 @@ export default class UserEntity {
     @Column({ name: 'name', nullable: true })
     name: string;
 
-    @Column({ name: 'last_name', nullable: true })
-    lastName: string;
-
     @Column({ name: 'email', nullable: false })
     email: string;
 

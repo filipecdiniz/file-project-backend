@@ -11,8 +11,10 @@ export class UserService {
     ) { }
 
     async createUserWithEmailOnly(email: string): Promise<UserEntity> {
-        const userExists = this.userRepository.findOne({ where: { email } })
-
+        const userExists = await this.userRepository.findOne({ where: { email } })
+        if (userExists) {
+            return userExists
+        }
         return await this.userRepository.save({
             email: email
         })
