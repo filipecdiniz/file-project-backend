@@ -9,7 +9,7 @@ export class CreateTableLogs1737991217274 implements MigrationInterface {
                 user_id int,
                 file_id int,
                 action text,
-                date_action date
+                date_action timestamp without time zone DEFAULT now() NOT NULL
             );
         `)
     }

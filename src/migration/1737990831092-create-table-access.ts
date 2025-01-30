@@ -9,7 +9,7 @@ export class CreateTableAccess1737990831092 implements MigrationInterface {
                 file_id int,
                 user_id int,
                 permission_type int,
-                date_grant date
+                date_grant timestamp without time zone DEFAULT now() NOT NULL
             );
         `)
     }
