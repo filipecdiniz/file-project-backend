@@ -10,9 +10,10 @@ export class CreateTableUser1737988747420 implements MigrationInterface {
                 email text,
                 password text,
                 picture_url text,
-                created_at timestamp without time zone DEFAULT now() NOT NULL,
-                updated_at timestamp without time zone DEFAULT now() NOT NULL
-            );`)
+                created_at timestamp with time zone DEFAULT now() NOT NULL,
+                updated_at timestamp with time zone DEFAULT now() NOT NULL
+            );`
+        )
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {

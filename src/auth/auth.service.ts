@@ -4,7 +4,6 @@ import { JwtService } from '@nestjs/jwt';
 import { LoginTokenService } from 'src/login-token/login-token.service';
 import { UserService } from 'src/user/user.service';
 import { MailerService } from 'src/mailer/mailer.service';
-import LoginWithEmailOnlyDTO from './dtos/LoginWithEmailOnly.dto';
 import ValidateLoginCodeDTO from './dtos/ValidateLoginCode.dto';
 
 @Injectable()
@@ -18,9 +17,16 @@ export class AuthService {
     ) { }
 
     async loginWithEmailOnly(email: string): Promise<any> {
+
+        //Test:
         const user = await this.userService.createUserWithEmailOnly(email)
-        const codeToken = await this.loginTokenService.createToken(user)
-        return await this.mailerService.sendMessage(email, codeToken)
+        return { email: user.email, code: await this.loginTokenService.createToken(user) }
+
+        //When projects it's done:
+        // const user = await this.userService.createUserWithEmailOnly(email)
+        // const codeToken = await this.loginTokenService.createToken(user)
+        //await this.mailerService.sendMessage(email, codeToken)
+        // return codeToken
     }
 
     async validateLoginCode({ email, code }: ValidateLoginCodeDTO) {
@@ -31,7 +37,7 @@ export class AuthService {
         if (!user) {
             return new BadRequestException(`Email not found!`)
         }
-        return await this.loginTokenService.validateToken(user.id, code)
+        return { code: await this.loginTokenService.validateToken(user.id, code) }
 
     }
 

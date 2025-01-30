@@ -11,7 +11,7 @@ export class CreateTableFile1737989706532 implements MigrationInterface {
                 type text,
                 size numeric(8, 4),
                 owner_id int,
-                created_at timestamp without time zone DEFAULT now() NOT NULL
+                created_at timestamp with time zone DEFAULT now() NOT NULL
             );`
         )
 

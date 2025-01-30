@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, ServiceUnavailableException } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import loginTokenEntity from './entities/loginToken.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -13,6 +13,19 @@ export class LoginTokenService {
     ) { }
 
     async createToken(user: UserEntity) {
+
+        //fetch data
+        const data = await this.loginTokenRepository.find({ where: { userId: user.id } })
+
+        //time less five minutes
+        const fiveMinutesEarlier = new Date()
+        fiveMinutesEarlier.setMinutes(new Date().getMinutes() - 5)
+
+        const tries = data.filter((data) => data.createdAt > fiveMinutesEarlier)
+
+        if (tries.length > 0) {
+            throw new BadRequestException('Please wait 5 minutes!')
+        }
 
         const code = GenerateCrypto()
 

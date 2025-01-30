@@ -10,7 +10,7 @@ export class CreateTableLoginToken1738007797546 implements MigrationInterface {
                 code text,
                 expires timestamp,
                 used boolean,
-                created_at timestamp without time zone DEFAULT now() NOT NULL
+                created_at timestamp with time zone DEFAULT now() NOT NULL
             );
 
             ALTER TABLE login_token
