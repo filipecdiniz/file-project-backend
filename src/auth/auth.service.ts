@@ -18,7 +18,7 @@ export class AuthService {
 
     async loginWithEmailOnly(email: string): Promise<any> {
 
-        //Test:
+        //While testing:
         const user = await this.userService.createUserWithEmailOnly(email)
         return { email: user.email, code: await this.loginTokenService.createToken(user) }
 
@@ -37,8 +37,10 @@ export class AuthService {
         if (!user) {
             return new BadRequestException(`Email not found!`)
         }
-        return { code: await this.loginTokenService.validateToken(user.id, code) }
-
+        await this.loginTokenService.validateToken(user.id, code)
+        const payload = { sub: user.id, email: user.email, code }
+        // console.log(process.env.JWT_SECRET)
+        return { email, access_token: await this.jwtService.signAsync({ sub: user.id, email: user.email, code }) }
     }
 
     async loginWithPassword(loginWithPassword: LoginWithPasswordDTO) {

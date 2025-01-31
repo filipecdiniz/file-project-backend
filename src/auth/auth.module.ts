@@ -10,10 +10,12 @@ import { MailerModule } from 'src/mailer/mailer.module';
     providers: [AuthService],
     controllers: [AuthController],
     imports: [
-        JwtModule.register({
-            global: true,
-            secret: process.env.JWT_SECRET,
-            signOptions: { expiresIn: '1d' }
+        JwtModule.registerAsync({
+            useFactory: () => ({
+                global: true,
+                secret: process.env.JWT_SECRET,
+                signOptions: { expiresIn: process.env.JWT_EXPIRES }
+            })
         }),
         LoginTokenModule,
         UserModule,

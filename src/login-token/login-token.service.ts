@@ -18,6 +18,7 @@ export class LoginTokenService {
         const data = await this.loginTokenRepository.find({ where: { userId: user.id } })
 
         //time less five minutes
+        /* Activate after:
         const fiveMinutesEarlier = new Date()
         fiveMinutesEarlier.setMinutes(new Date().getMinutes() - 5)
 
@@ -26,6 +27,7 @@ export class LoginTokenService {
         if (tries.length > 0) {
             throw new BadRequestException('Please wait 5 minutes!')
         }
+        */
 
         const code = GenerateCrypto()
 

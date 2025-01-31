@@ -3,3 +3,5 @@
 - @nestjs/config
 - @nestjs/typeorm
 - pg
+- JWT
+- Multer
