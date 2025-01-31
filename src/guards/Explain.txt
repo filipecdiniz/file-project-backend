@@ -1,0 +1,2 @@
+The AuthGuard will just say if the user jwtToken is valid or not. 
+If it is valid, the AuthGuard will returns true, otherway, will return a Exception.
