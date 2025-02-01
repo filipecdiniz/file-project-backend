@@ -4,13 +4,16 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { LoginTokenModule } from './login-token/login-token.module';
-import { MailerService } from './mailer/mailer.service';
 import { MailerModule } from './mailer/mailer.module';
+import { UploadModule } from './upload/upload.module';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './guards/AuthGuard.guard';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: ['.env.development.local']
+      envFilePath: ['.env.development.local'],
+      isGlobal: true
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
@@ -29,7 +32,13 @@ import { MailerModule } from './mailer/mailer.module';
     AuthModule,
     LoginTokenModule,
     MailerModule,
+    UploadModule,
   ],
-  providers: [MailerService],
+  // providers: [
+  //   {
+  //     provide: APP_GUARD,
+  //     useClass: AuthGuard,
+  //   }
+  // ]
 })
 export class AppModule { }

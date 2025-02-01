@@ -29,7 +29,7 @@ export class LoginTokenService {
         }
         */
 
-        const code = GenerateCrypto()
+        const code = GenerateCrypto(3)
 
         const expires = new Date()
         expires.setMinutes(new Date().getMinutes() + 5)

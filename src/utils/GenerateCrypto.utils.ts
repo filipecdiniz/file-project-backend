@@ -1,5 +1,5 @@
 import { randomBytes } from "crypto";
 
-export function GenerateCrypto() {
-    return randomBytes(3).toString('hex').toUpperCase();
+export function GenerateCrypto(bytes: number) {
+    return randomBytes(bytes).toString('hex').toUpperCase();
 }

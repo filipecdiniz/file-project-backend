@@ -5,3 +5,6 @@
 - pg
 - JWT
 - Multer
+- @types/multer
+- @aws-sdk/s3-request-presigner
+- @aws-sdk/client-s3

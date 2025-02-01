@@ -5,6 +5,7 @@ import { LoginTokenService } from 'src/login-token/login-token.service';
 import { UserService } from 'src/user/user.service';
 import { MailerService } from 'src/mailer/mailer.service';
 import ValidateLoginCodeDTO from './dtos/ValidateLoginCode.dto';
+import ReturnLoginDTO from './dtos/ReturnLogin.dto';
 
 @Injectable()
 export class AuthService {
@@ -40,7 +41,7 @@ export class AuthService {
         await this.loginTokenService.validateToken(user.id, code)
         const payload = { sub: user.id, email: user.email, code }
         // console.log(process.env.JWT_SECRET)
-        return { email, access_token: await this.jwtService.signAsync({ sub: user.id, email: user.email, code }) }
+        return { email, accessToken: await this.jwtService.signAsync({ sub: user.id, email: user.email, code }) }
     }
 
     async loginWithPassword(loginWithPassword: LoginWithPasswordDTO) {
